@@ -6,6 +6,10 @@ export interface User {
   role?: string
   phone?: string
   avatar?: string
+  address?: string
+  city?: string
+  state?: string
+  postal_code?: string
   created_at?: string
   updated_at?: string
 }
@@ -272,10 +276,22 @@ export interface PaginatedResponse<T> {
 
 // Dashboard Stats
 export interface DashboardStats {
-  total_pets: number
-  upcoming_appointments: number
-  pending_invoices: number
-  recent_vaccinations: number
+  pets: {
+    total: number
+    active: number
+  }
+  appointments: {
+    upcoming: number
+    today: number
+  }
+  vaccinations: {
+    due_soon: number
+    overdue: number
+  }
+  invoices: {
+    unpaid: number
+    unpaid_amount: number
+  }
 }
 
 // Cart Types (for product ordering)

@@ -12,7 +12,6 @@ import { PawPrint, User, Mail, Lock, Eye, EyeOff, Loader2, Phone } from 'lucide-
 import toast from 'react-hot-toast'
 import { authService } from '@/services/auth.service'
 import { useI18n } from '@/components/Providers'
-import HeaderControls from '@/components/HeaderControls'
 
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),

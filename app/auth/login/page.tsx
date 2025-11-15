@@ -11,7 +11,6 @@ import { PawPrint, Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { authService } from '@/services/auth.service'
 import { useI18n } from '@/components/Providers'
-import HeaderControls from '@/components/HeaderControls'
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -37,6 +36,7 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -55,6 +55,12 @@ export default function LoginPage() {
     }
   }
 
+  const handleAutoLogin = () => {
+    setValue('email', 'owner@test.com')
+    setValue('password', 'password')
+    handleSubmit(onSubmit)()
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
       <motion.div
@@ -65,7 +71,6 @@ export default function LoginPage() {
       >
         <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-200 dark:border-gray-700">
           <div className="flex justify-end mb-4">
-            <HeaderControls />
           </div>
           {/* Logo */}
           <div className="flex justify-center mb-8">
@@ -180,6 +185,26 @@ export default function LoginPage() {
                 </>
               ) : (
                 t('signIn', 'Sign In')
+              )}
+            </button>
+
+            {/* Auto Login Button */}
+            <button
+              type="button"
+              onClick={handleAutoLogin}
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="animate-spin h-5 w-5 me-2" />
+                  {t('signingIn', 'Signing in...')}
+                </>
+              ) : (
+                <>
+                  <PawPrint className="h-5 w-5 me-2" />
+                  {t('autoLogin', 'Quick Login (Test)')}
+                </>
               )}
             </button>
           </form>

@@ -159,9 +159,9 @@ export default function PetsPage() {
                   >
                     {/* Pet Image */}
                     <div className="aspect-square bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900/30 dark:to-purple-900/30 relative overflow-hidden">
-                      {pet.photo || pet.image_url ? (
+                      {pet.photo_url ? (
                         <img
-                          src={pet.photo || pet.image_url}
+                          src={pet.photo_url}
                           alt={pet.name}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />

@@ -37,11 +37,11 @@ export default function NotificationPanel() {
     useNotificationStore()
 
   useEffect(() => {
-    fetchNotifications()
+    // fetchNotifications()
     
     // Poll for new notifications every minute
     const interval = setInterval(() => {
-      fetchNotifications()
+      // fetchNotifications()
     }, 60000)
 
     return () => clearInterval(interval)

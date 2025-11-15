@@ -19,6 +19,7 @@ import {
   Tag,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { productService } from '@/services/product.service'
 import { useCartStore } from '@/stores/cart'
 import { Product } from '@/types'
@@ -27,6 +28,7 @@ import toast from 'react-hot-toast'
 
 export default function ShopPage() {
   const { t } = useI18n()
+  const router = useRouter()
   const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<string[]>([])
   const [loading, setLoading] = useState(true)
@@ -82,8 +84,7 @@ export default function ShopPage() {
       toast.error(t('cartEmpty', 'Your cart is empty'))
       return
     }
-    toast.success(t('redirectingToCheckout', 'Redirecting to checkout...'))
-    // TODO: Implement checkout flow
+    router.push('/shop/checkout')
   }
 
   if (loading) {

@@ -46,7 +46,7 @@ export default function InvoicesPage() {
   const fetchInvoices = async () => {
     try {
       const response = await invoiceService.getAll({ page: 1 })
-      const invoicesData = response.data || []
+      const invoicesData = response || []
       
       // Map invoices to include pet name
       const enrichedInvoices = invoicesData.map((invoice: any) => ({
@@ -149,8 +149,12 @@ export default function InvoicesPage() {
     ? filteredAndSortedInvoices
     : filteredAndSortedInvoices.filter(inv => inv.status === statusFilter)
 
-  const totalPaid = invoices.filter(i => i.status === 'paid').reduce((sum, i) => sum + i.total_amount, 0)
-  const totalPending = invoices.filter(i => i.status !== 'paid').reduce((sum, i) => sum + i.total_amount, 0)
+  const totalPaid = invoices
+    .filter((i) => i.status === "paid")
+    .reduce((sum, i) => sum + parseFloat(i.total_amount), 0);
+  const totalPending = invoices
+    .filter((i) => i.status !== "paid")
+    .reduce((sum, i) => sum + parseFloat(i.total_amount), 0);
 
   if (loading) {
     return (
@@ -180,7 +184,7 @@ export default function InvoicesPage() {
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('totalPaid', 'Total Paid')}</p>
                 <p className="text-2xl font-bold text-green-600 dark:text-green-400 mt-1">
-                  ${totalPaid.toFixed(2)}
+                  ${parseFloat(totalPaid).toFixed(2)}
                 </p>
               </div>
               <div className="p-3 bg-green-100 dark:bg-green-900 rounded-xl">
@@ -193,7 +197,7 @@ export default function InvoicesPage() {
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('totalPending', 'Pending')}</p>
                 <p className="text-2xl font-bold text-yellow-600 dark:text-yellow-400 mt-1">
-                  ${totalPending.toFixed(2)}
+                  ${parseFloat(totalPending).toFixed(2)}
                 </p>
               </div>
               <div className="p-3 bg-yellow-100 dark:bg-yellow-900 rounded-xl">
@@ -272,7 +276,7 @@ export default function InvoicesPage() {
               label: t('amount', 'Amount'),
               sortable: true,
               render: (value) => (
-                <span className="font-semibold">${value.toFixed(2)}</span>
+                <span className="font-semibold">${parseFloat(value).toFixed(2)}</span>
               ),
             },
             {

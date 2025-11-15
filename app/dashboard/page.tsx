@@ -36,7 +36,6 @@ export default function DashboardPage() {
           appointmentService.getAll({ page: 1, status: 'scheduled' }),
           petService.getAll(),
         ])
-        
         setStats(statsData)
         setUpcomingAppointments(appointmentsData.data?.slice(0, 3) || [])
         setRecentPets(petsData.slice(0, 4) || [])
@@ -53,28 +52,28 @@ export default function DashboardPage() {
   const statCards = [
     {
       name: t('totalPets', 'Total Pets'),
-      value: stats?.total_pets || 0,
+      value: stats?.pets?.total || 0,
       icon: Heart,
       color: 'from-primary-500 to-purple-500',
       href: '/dashboard/pets',
     },
     {
       name: t('upcomingAppointments', 'Upcoming Appointments'),
-      value: stats?.upcoming_appointments || 0,
+      value: stats?.appointments?.upcoming || 0,
       icon: Calendar,
       color: 'from-blue-500 to-cyan-500',
       href: '/dashboard/appointments',
     },
     {
       name: t('unpaidInvoices', 'Unpaid Invoices'),
-      value: stats?.pending_invoices || 0,
+      value: stats?.invoices?.unpaid || 0,
       icon: FileText,
       color: 'from-purple-500 to-indigo-500',
       href: '/dashboard/invoices',
     },
     {
-      name: t('totalPaid', 'Total Spent'),
-      value: `$${stats?.total_spent || 0}`,
+      name: t('unpaidAmount', 'Unpaid Amount'),
+      value: `$${Number(stats?.invoices?.unpaid_amount || 0).toFixed(2)}`,
       icon: TrendingUp,
       color: 'from-green-500 to-emerald-500',
       href: '/dashboard/invoices',
@@ -94,11 +93,6 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="p-4 sm:p-6 lg:p-8">
-        {/* Page header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t('dashboard', 'Dashboard')}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">{t('welcomeToDashboard', 'Welcome back! Here is your pet care overview.')}</p>
-        </div>
 
         {/* Stats grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

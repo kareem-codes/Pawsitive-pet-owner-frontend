@@ -92,8 +92,8 @@ export default function PetDetailPage() {
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
             <div className="flex items-center gap-4">
               <div className="h-20 w-20 rounded-full bg-gradient-to-br from-primary-500 to-purple-500 flex items-center justify-center">
-                {pet.photo || pet.image_url ? (
-                  <img src={pet.photo || pet.image_url} alt={pet.name} className="h-20 w-20 rounded-full object-cover" />
+                {pet.photo_url ? (
+                  <img src={pet.photo_url} alt={pet.name} className="h-20 w-20 rounded-full object-cover" />
                 ) : (
                   <Heart className="h-10 w-10 text-white" />
                 )}

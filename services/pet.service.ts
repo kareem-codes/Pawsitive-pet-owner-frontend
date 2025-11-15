@@ -9,7 +9,7 @@ export const petService = {
 
   async getById(id: number): Promise<Pet> {
     const response = await apiClient.get<ApiResponse<Pet>>(`/pets/${id}`)
-    return response.data
+    return response
   },
 
   async create(data: Partial<Pet> | FormData): Promise<Pet> {
