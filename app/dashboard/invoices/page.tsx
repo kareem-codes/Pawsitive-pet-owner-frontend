@@ -46,7 +46,7 @@ export default function InvoicesPage() {
   const fetchInvoices = async () => {
     try {
       const response = await invoiceService.getAll({ page: 1 })
-      const invoicesData = response || []
+      const invoicesData = Array.isArray(response) ? response : response?.data || []
       
       // Map invoices to include pet name
       const enrichedInvoices = invoicesData.map((invoice: any) => ({

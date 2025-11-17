@@ -370,12 +370,12 @@ export default function LandingPage() {
                 ))}
               </div>
               <p className="text-lg text-card-foreground mb-4 italic">
-                "
+                &ldquo;
                 {t(
                   "testimonialQuote",
                   "This platform has completely transformed how I manage my pets' health. Everything is so organized and easy to access!"
                 )}
-                "
+                &rdquo;
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold me-2">

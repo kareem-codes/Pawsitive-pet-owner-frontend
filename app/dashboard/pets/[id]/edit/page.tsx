@@ -12,8 +12,10 @@ import {
 import DashboardLayout from '@/components/DashboardLayout'
 import { petService } from '@/services/pet.service'
 import toast from 'react-hot-toast'
+import { useI18n } from '@/components/Providers'
 
 export default function EditPetPage() {
+  const { t } = useI18n()
   const params = useParams()
   const router = useRouter()
   const [loading, setLoading] = useState(true)
@@ -105,10 +107,10 @@ export default function EditPetPage() {
       }
       
       await petService.update(Number(params.id), submitData)
-      toast.success('Pet updated successfully!')
+      toast.success(t('petUpdatedSuccessfully', 'Pet updated successfully!'))
       router.push(`/dashboard/pets/${params.id}`)
     } catch (error: any) {
-      toast.error(error.message || 'Failed to update pet')
+      toast.error(error.message || t('failedToUpdatePet', 'Failed to update pet'))
     } finally {
       setSaving(false)
     }
@@ -134,11 +136,11 @@ export default function EditPetPage() {
             className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-4"
           >
             <ArrowLeft className="h-5 w-5 me-2" />
-            Back to Pet Details
+            {t('backToPets', 'Back to Pet Details')}
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Edit Pet</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t('editPet', 'Edit Pet')}</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Update your pet's information
+            {t('updatePetInfo', 'Update your pet&apos;s information')}
           </p>
         </div>
 
@@ -147,12 +149,12 @@ export default function EditPetPage() {
             {/* Photo Upload */}
             <div className="mb-8">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
-                Pet Photo
+                {t('photoOptional', 'Pet Photo')}
               </label>
               <div className="flex items-center gap-6">
                 <div className="h-32 w-32 rounded-full bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900/30 dark:to-purple-900/30 flex items-center justify-center overflow-hidden">
                   {photoPreview ? (
-                    <img src={photoPreview} alt="Preview" className="h-full w-full object-cover" />
+                    <img src={photoPreview} alt={t('photoPreview', 'Preview')} className="h-full w-full object-cover" />
                   ) : (
                     <Heart className="h-16 w-16 text-primary-300 dark:text-primary-700" />
                   )}
@@ -160,7 +162,7 @@ export default function EditPetPage() {
                 <div>
                   <label className="cursor-pointer inline-flex items-center px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
                     <Upload className="h-4 w-4 me-2" />
-                    Change Photo
+                    {t('uploadPhoto', 'Change Photo')}
                     <input
                       type="file"
                       accept="image/*"
@@ -324,7 +326,7 @@ export default function EditPetPage() {
                 href={`/dashboard/pets/${params.id}`}
                 className="px-6 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               >
-                Cancel
+                {t('cancel', 'Cancel')}
               </Link>
               <button
                 type="submit"
@@ -332,7 +334,7 @@ export default function EditPetPage() {
                 className="inline-flex items-center px-6 py-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save className="h-4 w-4 me-2" />
-                {saving ? 'Saving...' : 'Save Changes'}
+                {saving ? t('saving', 'Saving...') : t('saveChanges', 'Save Changes')}
               </button>
             </div>
           </div>

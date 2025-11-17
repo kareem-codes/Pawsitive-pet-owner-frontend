@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import {
@@ -24,7 +24,7 @@ import AdvancedFilter, { SortOption } from '@/components/AdvancedFilter'
 import { parseISO, isWithinInterval } from 'date-fns'
 import { useI18n } from '@/components/Providers'
 
-export default function MedicalRecordsPage() {
+function MedicalRecordsContent() {
   const { t } = useI18n()
   const searchParams = useSearchParams()
   const [records, setRecords] = useState<any[]>([])
@@ -468,5 +468,22 @@ export default function MedicalRecordsPage() {
         )}
       </div>
     </DashboardLayout>
+  )
+}
+
+function LoadingFallback() {
+  const { t } = useI18n()
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-lg text-gray-600 dark:text-gray-400">{t('loading', 'Loading...')}</div>
+    </div>
+  )
+}
+
+export default function MedicalRecordsPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <MedicalRecordsContent />
+    </Suspense>
   )
 }

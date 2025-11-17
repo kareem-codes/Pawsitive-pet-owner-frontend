@@ -74,10 +74,10 @@ export default function NewPetPage() {
       }
       
       await petService.create(submitData)
-      toast.success('Pet added successfully!')
+      toast.success(t('petAddedSuccessfully', 'Pet added successfully!'))
       router.push('/dashboard/pets')
     } catch (error: any) {
-      toast.error(error.message || 'Failed to add pet')
+      toast.error(error.message || t('failedToAddPet', 'Failed to add pet'))
     } finally {
       setSaving(false)
     }
@@ -93,11 +93,11 @@ export default function NewPetPage() {
             className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-4"
           >
             <ArrowLeft className="h-5 w-5 me-2" />
-            Back to Pets
+            {t('backToPets', 'Back to Pets')}
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Add New Pet</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{t('addNewPetTitle', 'Add New Pet')}</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
-            Register a new companion to your family
+            {t('registerNewPet', 'Register a new companion to your family')}
           </p>
         </div>
 
@@ -106,12 +106,12 @@ export default function NewPetPage() {
             {/* Photo Upload */}
             <div className="mb-8">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
-                Pet Photo (Optional)
+                {t('photoOptional', 'Photo (optional)')}
               </label>
               <div className="flex items-center gap-6">
                 <div className="h-32 w-32 rounded-full bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900/30 dark:to-purple-900/30 flex items-center justify-center overflow-hidden">
                   {photoPreview ? (
-                    <img src={photoPreview} alt="Preview" className="h-full w-full object-cover" />
+                    <img src={photoPreview} alt={t('photoPreview', 'Preview')} className="h-full w-full object-cover" />
                   ) : (
                     <Heart className="h-16 w-16 text-primary-300 dark:text-primary-700" />
                   )}
@@ -119,7 +119,7 @@ export default function NewPetPage() {
                 <div>
                   <label className="cursor-pointer inline-flex items-center px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
                     <Upload className="h-4 w-4 me-2" />
-                    Upload Photo
+                    {t('uploadPhoto', 'Upload Photo')}
                     <input
                       type="file"
                       accept="image/*"
@@ -291,7 +291,7 @@ export default function NewPetPage() {
                 href="/dashboard/pets"
                 className="px-6 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               >
-                Cancel
+                {t('cancel', 'Cancel')}
               </Link>
               <button
                 type="submit"
@@ -299,7 +299,7 @@ export default function NewPetPage() {
                 className="inline-flex items-center px-6 py-2 bg-gradient-to-r from-primary-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save className="h-4 w-4 me-2" />
-                {saving ? 'Saving...' : 'Save Pet'}
+                {saving ? t('saving', 'Saving...') : t('savePet', 'Save Pet')}
               </button>
             </div>
           </div>

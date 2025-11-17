@@ -23,7 +23,7 @@ export const productService = {
         return []
       }
       const categories = Array.from(new Set(response.data.map(p => p.category)))
-      return categories.filter(Boolean) // Remove any null/undefined values
+      return categories.filter(Boolean) as string[] // Remove any null/undefined values
     } catch (error) {
       console.error('Error fetching categories:', error)
       return []

@@ -113,7 +113,7 @@ export default function CheckoutPage() {
 
       const response = await orderService.placeOrder(orderData)
       
-      setOrderNumber(response.order.invoice_number)
+      setOrderNumber(response.data.order.invoice_number)
       setOrderPlaced(true)
       clearCart()
       toast.success(t('orderPlacedSuccess', 'Order placed successfully!'))

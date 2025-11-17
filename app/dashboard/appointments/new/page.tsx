@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import {
@@ -13,8 +13,10 @@ import DashboardLayout from '@/components/DashboardLayout'
 import { petService } from '@/services/pet.service'
 import { appointmentService } from '@/services/appointment.service'
 import toast from 'react-hot-toast'
+import { useI18n } from '@/components/Providers'
 
-export default function NewAppointmentPage() {
+function NewAppointmentContent() {
+  const { t } = useI18n()
   const router = useRouter()
   const searchParams = useSearchParams()
   const [pets, setPets] = useState<any[]>([])
@@ -275,7 +277,7 @@ export default function NewAppointmentPage() {
               <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
                 <p className="text-sm text-blue-800 dark:text-blue-300">
                   <strong>Note:</strong> Your appointment request will be reviewed by our staff. 
-                  You'll receive a confirmation once a veterinarian is assigned.
+                  You&apos;ll receive a confirmation once a veterinarian is assigned.
                 </p>
               </div>
 
@@ -301,5 +303,22 @@ export default function NewAppointmentPage() {
         )}
       </div>
     </DashboardLayout>
+  )
+}
+
+function LoadingFallback() {
+  const { t } = useI18n()
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-lg text-gray-600 dark:text-gray-400">{t('loading', 'Loading...')}</div>
+    </div>
+  )
+}
+
+export default function NewAppointmentPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <NewAppointmentContent />
+    </Suspense>
   )
 }

@@ -130,7 +130,7 @@ export default function NotificationPanel() {
                       No new notifications
                     </h4>
                     <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-                      You're all caught up! We'll notify you when something new happens.
+                      You&apos;re all caught up! We&apos;ll notify you when something new happens.
                     </p>
                   </div>
                 ) : (

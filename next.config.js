@@ -4,19 +4,21 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: 'localhost',
+        protocol: "http",
+        hostname: "localhost",
       },
       {
-        protocol: 'https',
-        hostname: '*.amazonaws.com',
+        protocol: "https",
+        hostname: "*.amazonaws.com",
       },
     ],
   },
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1',
-    NEXT_PUBLIC_APP_NAME: 'Pawsitive Systems',
-  },
-}
+    NEXT_PUBLIC_API_URL:
+      process.env.NEXT_PUBLIC_API_URL ||
+      "https://pawsitive-owner.kareem-codes.com/api/v1",
+    NEXT_PUBLIC_APP_NAME: "Pawsitive Systems",
+  }
+};
 
 module.exports = nextConfig
