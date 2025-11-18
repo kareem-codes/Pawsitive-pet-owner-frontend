@@ -13,13 +13,14 @@ class ApiClient {
     this.client = axios.create({
       baseURL: API_URL,
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+        Origin: "https://pawsitive-pet-owner-frontend.vercel.app",
       },
       withCredentials: useCredentials,
       timeout: 30000, // 30 seconds timeout
-    })
+    });
 
     // Request interceptor
     this.client.interceptors.request.use(
