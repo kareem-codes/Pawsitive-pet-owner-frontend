@@ -16,9 +16,9 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL:
       process.env.NEXT_PUBLIC_API_URL ||
-      "https://pawsitive-pet-owner-frontend.vercel.app/api/v1",
+      "https://pawsitive-backend.kareem-codes.com/api/v1",
     NEXT_PUBLIC_APP_NAME: "Pawsitive Systems",
-  }
+  },
 };
 
 module.exports = nextConfig

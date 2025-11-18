@@ -1,6 +1,8 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://pawsitive-pet-owner-frontend.vercel.app/api/v1'
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://pawsitive-backend.kareem-codes.com/api/v1";
 
 class ApiClient {
   private client: AxiosInstance
