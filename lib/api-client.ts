@@ -16,7 +16,6 @@ class ApiClient {
         "Content-Type": "application/json",
         Accept: "application/json",
         "X-Requested-With": "XMLHttpRequest",
-        Origin: "https://pawsitive-pet-owner-frontend.vercel.app",
       },
       withCredentials: useCredentials,
       timeout: 30000, // 30 seconds timeout
