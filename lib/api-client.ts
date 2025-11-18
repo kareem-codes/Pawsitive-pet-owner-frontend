@@ -1,18 +1,22 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://pawsitive-owner.kareem-codes.com/api/v1'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://pawsitive-pet-owner-frontend.vercel.app/api/v1'
 
 class ApiClient {
   private client: AxiosInstance
 
   constructor() {
+    const useCredentials = process.env.NEXT_PUBLIC_USE_CREDENTIALS !== 'false'
+    
     this.client = axios.create({
       baseURL: API_URL,
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
       },
-      withCredentials: true,
+      withCredentials: useCredentials,
+      timeout: 30000, // 30 seconds timeout
     })
 
     // Request interceptor
@@ -31,6 +35,17 @@ class ApiClient {
     this.client.interceptors.response.use(
       (response) => response,
       async (error: AxiosError) => {
+        // Handle CORS and network errors
+        if (!error.response) {
+          console.error('Network/CORS error:', error.message)
+          if (typeof window !== 'undefined') {
+            // Check if it's a CORS error
+            if (error.message.includes('Network Error') || error.code === 'ERR_NETWORK') {
+              console.error('CORS or network connectivity issue detected')
+            }
+          }
+        }
+        
         if (error.response?.status === 401) {
           this.removeToken()
           if (typeof window !== 'undefined') {
