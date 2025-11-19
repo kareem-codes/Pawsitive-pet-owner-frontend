@@ -16,7 +16,7 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL:
       process.env.NEXT_PUBLIC_API_URL ||
-      "https://pawsitive-backend.kareem-codes.com/api/v1",
+      "https://pawsitive-api.kareem-codes.com/api/v1",
     NEXT_PUBLIC_APP_NAME: "Pawsitive Systems",
   },
 };

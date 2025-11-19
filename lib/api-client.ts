@@ -2,13 +2,14 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  "https://pawsitive-backend.kareem-codes.com/api/v1";
+  "https://pawsitive-api.kareem-codes.com/api/v1";
 
 class ApiClient {
   private client: AxiosInstance
 
   constructor() {
-    const useCredentials = process.env.NEXT_PUBLIC_USE_CREDENTIALS !== 'false'
+    // Must use credentials for InfinityFree's bot protection cookie
+    const useCredentials = true;
     
     this.client = axios.create({
       baseURL: API_URL,
