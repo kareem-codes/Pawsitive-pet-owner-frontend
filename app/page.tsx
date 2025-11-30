@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useI18n, useTheme } from '@/components/Providers'
-import HeaderControls from '@/components/HeaderControls'
-import { authService } from '@/services/auth.service'
-import { 
-  Heart, 
-  Calendar, 
-  Package, 
-  Shield, 
-  Clock, 
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useI18n, useTheme } from "@/components/Providers";
+import HeaderControls from "@/components/HeaderControls";
+import { authService } from "@/services/auth.service";
+import {
+  Heart,
+  Calendar,
+  Package,
+  Shield,
+  Clock,
   Users,
   CheckCircle2,
   ArrowRight,
@@ -22,52 +22,68 @@ import {
   Rabbit,
   Turtle,
   Bird,
-  Fish
-} from 'lucide-react'
+  Fish,
+} from "lucide-react";
+import { styleText } from "util";
 
 export default function LandingPage() {
-  const { t } = useI18n()
-  const router = useRouter()
-  const isAuthenticated = authService.isAuthenticated()
+  const { t } = useI18n();
+  const router = useRouter();
+  const isAuthenticated = authService.isAuthenticated();
 
-  const handleAuthClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+  const handleAuthClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    path: string
+  ) => {
     if (isAuthenticated) {
-      e.preventDefault()
-      router.push('/dashboard')
+      e.preventDefault();
+      router.push("/dashboard");
     }
-  }
+  };
 
   const features = [
     {
       icon: Calendar,
-      title: t('featureEasyAppointmentTitle', 'Easy Appointment Booking'),
-      description: t('featureEasyAppointmentDesc', 'Schedule vet visits online at your convenience, 24/7'),
+      title: t("featureEasyAppointmentTitle", "Easy Appointment Booking"),
+      description: t(
+        "featureEasyAppointmentDesc",
+        "Schedule vet visits online at your convenience, 24/7"
+      ),
     },
     {
       icon: Heart,
-      title: t('featurePetHealthRecordsTitle', 'Pet Health Records'),
-      description: t('featurePetHealthRecordsDesc', 'Access complete medical history, vaccinations, and prescriptions'),
+      title: t("featurePetHealthRecordsTitle", "Pet Health Records"),
+      description: t(
+        "featurePetHealthRecordsDesc",
+        "Access complete medical history, vaccinations, and prescriptions"
+      ),
     },
     {
       icon: Package,
-      title: t('featureOnlineStoreTitle', 'Online Store'),
-      description: t('featureOnlineStoreDesc', 'Order pet food, medicines, and accessories with home delivery'),
+      title: t("featureOnlineStoreTitle", "Online Store"),
+      description: t(
+        "featureOnlineStoreDesc",
+        "Order pet food, medicines, and accessories with home delivery"
+      ),
     },
     {
       icon: Shield,
-      title: t('featureSecurePrivateTitle', 'Secure & Private'),
-      description: t('featureSecurePrivateDesc', 'Your pet\'s health data is encrypted and protected'),
+      title: t("featureSecurePrivateTitle", "Secure & Private"),
+      description: t(
+        "featureSecurePrivateDesc",
+        "Your pet's health data is encrypted and protected"
+      ),
     },
-  ]
+  ];
 
   const benefits = [
-    t('benefitViewAllPets', 'View all your pets in one place'),
-    t('benefitNeverMissVaccination', 'Never miss a vaccination date'),
-    t('benefitDownloadRecords', 'Download health records and invoices'),
-    t('benefitTrackGrowth', 'Track your pet\'s weight and growth'),
-    t('benefitGetReminders', 'Get reminders for appointments'),
-    t('benefitOrderOnline', 'Order products online'),
-  ]
+    t("benefitViewAllPets", "View all your pets in one place"),
+    t("benefitNeverMissVaccination", "Never miss a vaccination date"),
+    t("benefitDownloadRecords", "Download health records and invoices"),
+    t("benefitTrackGrowth", "Track your pet's weight and growth"),
+    t("benefitGetReminders", "Get reminders for appointments"),
+    t("benefitOrderOnline", "Order products online"),
+  ];
 
   // Floating pet animations
   const floatingPaws = Array.from({ length: 15 }, (_, i) => ({
@@ -77,8 +93,7 @@ export default function LandingPage() {
     x: Math.random() * 100,
     size: 20 + Math.random() * 30,
     rotation: Math.random() * 360,
-  }))
-
+  }));
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Animated Paw Prints Background */}
@@ -160,8 +175,15 @@ export default function LandingPage() {
         <div className="container mx-auto px-2 py-4 md:px-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <PawPrint className="h-8 w-8 text-primary" />
-              <span className="md:text-2xl text-[18px] font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent ps-2">
+              <img
+                src="/logo.png"
+                style={{
+                  width: "auto",
+                  height: "45px",
+                  filter: "hue-rotate(40deg)",
+                }}
+              ></img>{" "}
+              <span className="md:text-2xl text-[18px] font-bold text-primary ps-1">
                 {t("siteTitle", "Pawsitive Systems")}
               </span>
             </div>
@@ -183,7 +205,7 @@ export default function LandingPage() {
                 <>
                   <Link
                     href="/auth/login"
-                    onClick={(e) => handleAuthClick(e, '/auth/login')}
+                    onClick={(e) => handleAuthClick(e, "/auth/login")}
                     className="text-foreground hover:text-primary font-medium transition-colors flex items-center gap-2 hidden md:inline"
                     title={t("signIn", "Sign In")}
                   >
@@ -193,7 +215,7 @@ export default function LandingPage() {
                   </Link>
                   <Link
                     href="/auth/register"
-                    onClick={(e) => handleAuthClick(e, '/auth/register')}
+                    onClick={(e) => handleAuthClick(e, "/auth/register")}
                     className="bg-primary text-primary-foreground px-3 md:px-6 py-2 rounded-full hover:bg-primary/90 transition-all hover:shadow-lg flex items-center gap-2 dark:text-white"
                     title={t("getStarted", "Get Started")}
                   >
@@ -217,8 +239,9 @@ export default function LandingPage() {
           transition={{ duration: 0.6 }}
           className="text-center max-w-4xl mx-auto"
         >
+          <div id="pets1"></div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-primary-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="text-primary">
               {t("heroTitle1", "Your Pet's Health,")}
             </span>
             <br />
@@ -507,4 +530,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
